@@ -1,12 +1,15 @@
-origin_url=$(git config --get remote.origin.url)
 repo_name=$(basename `git rev-parse --show-toplevel`)
 branch=master
 
-folder=$repo_name+$branch
+internal_name=$repo_name+$branch
 
 cd /tmp
-git clone $origin_url $folder
-cd $folder
+git clone $origin_url $internal_name
+cd $internal_name
 git checkout $branch
 
-npm run docker
+#docker kill $internal_name
+
+container_id=$(npm run docker | awk 'END {print}')
+
+docker port $container_id
