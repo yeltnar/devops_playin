@@ -1,3 +1,4 @@
+origin_url=$origin_url
 repo_name=$(basename `git rev-parse --show-toplevel`)
 branch=master
 
